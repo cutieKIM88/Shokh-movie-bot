@@ -1,6 +1,6 @@
 from telebot import TeleBot, types
 
-bot = TeleBot("7959291954:AAFxchyteSx9WxUqReKfnL1WURgqpNLuynY") 
+bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI") 
 
 # Majburiy kanal
 required_channel = "@shokh_movie"
@@ -12,7 +12,7 @@ films = {
     "3": "https://t.me/shokh_movie/23",
     "4": "https://t.me/shokh_movie/26",
     "5": "https://t.me/shokh_movie/28",
-    "6": "https://t.me/shokh_movie/29",echo -n "$TELEGRAM_TOKEN" | wc -c
+    "6": "https://t.me/shokh_movie/29",
 }
 
 # Kanal obunasini tekshirish
