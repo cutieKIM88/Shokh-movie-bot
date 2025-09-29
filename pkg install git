@@ -1,0 +1,6 @@
+git init
+git add .  # Barcha fayllarni qo'shadi (bot.py, requirements.txt)
+git commit -m "Birinchi yuklash: @shokh_moviebot"
+git branch -M main
+git remote add origin https://github.com/cutieKIM88/Shokh-movie-bot.git
+git push -u origin main
