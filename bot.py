@@ -1,11 +1,9 @@
 from telebot import TeleBot, types
 
-bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI") 
+bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")
 
-# Majburiy kanal
 required_channel = "@shokh_movie"
 
-# 🎬 Kinolar bazasi
 films = {
     "1": "https://t.me/shokh_movie/21",
     "2": "https://t.me/shokh_movie/22",
@@ -15,15 +13,13 @@ films = {
     "6": "https://t.me/shokh_movie/29",
 }
 
-# Kanal obunasini tekshirish
 def check_subscription(user_id):
     try:
         member = bot.get_chat_member(required_channel, user_id)
         return member.status in ["member", "administrator", "creator"]
-    except:
+    except Exception:
         return False
 
-# /start komandasi
 @bot.message_handler(commands=['start'])
 def start(message):
     if not check_subscription(message.from_user.id):
@@ -41,7 +37,6 @@ def start(message):
     else:
         send_welcome(message)
 
-# Tekshirish tugmasi
 @bot.callback_query_handler(func=lambda call: call.data == "check_sub")
 def check_sub(call):
     if check_subscription(call.from_user.id):
@@ -50,7 +45,6 @@ def check_sub(call):
     else:
         bot.answer_callback_query(call.id, "❗ Hali kanalga a’zo bo‘lmadingiz!")
 
-# Xush kelibsiz va kino kodlari
 def send_welcome(message):
     markup = types.InlineKeyboardMarkup()
     kanal_btn = types.InlineKeyboardButton("📢 Telegram Kanal", url="https://t.me/shokh_movie")
@@ -66,11 +60,10 @@ def send_welcome(message):
 
     bot.send_message(message.chat.id, text, reply_markup=markup)
 
-# 🔍 Kino qidirish
 @bot.message_handler(func=lambda message: True)
 def search(message):
     if not check_subscription(message.from_user.id):
-        start(message)  # Agar obuna bo‘lmagan bo‘lsa, qaytadan start oynasini ko‘rsatadi
+        start(message)
         return
 
     query = message.text.strip()
@@ -79,4 +72,5 @@ def search(message):
     else:
         bot.send_message(message.chat.id, "😔 Bunday kod topilmadi. Iltimos, boshqa kod yozib ko‘ring.")
 
-bot.polling()
+if __name__ == "__main__":
+    bot.polling(none_stop=True, interval=0)
