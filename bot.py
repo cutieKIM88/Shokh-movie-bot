@@ -1,4 +1,5 @@
 from telebot import TeleBot, types
+import telebot
 from flask import Flask, request
 import os
 
@@ -80,7 +81,6 @@ def search(message):
 @server.route("/" + bot.token, methods=['POST'])
 def getMessage(): 
     json_str = request.get_data().decode("UTF-8")
-    
     update = telebot.types.Update.de_json(json_str)
     bot.process_new_updates([update])
     return "!", 200
@@ -88,7 +88,7 @@ def getMessage():
 @server.route("/", methods=['GET'])
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url="https://YOUR-APP-NAME.onrender.com/" + bot.token)
+    bot.set_webhook(url="https://shokh-movie-bot-1.onrender.com/" + bot.token)
     return "Webhook set", 200
 
 if __name__ == "__main__":
