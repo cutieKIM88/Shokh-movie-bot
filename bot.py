@@ -2,7 +2,7 @@ from telebot import TeleBot, types
 from flask import Flask, request
 import os
 
-bot = TeleBot("TOKENINGIZNI_BU_YERGA_QOYING")   # tokenni environment variable qilib saqlash yaxshi
+bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")  
 server = Flask(__name__)
 
 required_channel = "@shokh_movie"
