@@ -1,6 +1,9 @@
 from telebot import TeleBot, types
+from flask import Flask, request
+import os
 
-bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")
+bot = TeleBot("TOKENINGIZNI_BU_YERGA_QOYING")   # tokenni environment variable qilib saqlash yaxshi
+server = Flask(__name__)
 
 required_channel = "@shokh_movie"
 
@@ -73,5 +76,21 @@ def search(message):
     else:
         bot.send_message(message.chat.id, "😔 Bunday kod topilmadi. Iltimos, boshqa kod yozib ko‘ring.")
 
+# --- Flask routes ---
+@server.route("/" + bot.token, methods=['POST'])
+def getMessage(): 
+    json_str = request.get_data().decode("UTF-8")
+    
+    update = telebot.types.Update.de_json(json_str)
+    bot.process_new_updates([update])
+    return "!", 200
+
+@server.route("/", methods=['GET'])
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url="https://YOUR-APP-NAME.onrender.com/" + bot.token)
+    return "Webhook set", 200
+
 if __name__ == "__main__":
-    bot.polling(none_stop=True, interval=0)
+    port = int(os.environ.get('PORT', 5000))
+    server.run(host="0.0.0.0", port=port)
