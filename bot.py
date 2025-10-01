@@ -6,10 +6,8 @@ import os
 bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")  
 server = Flask(__name__)
 
-# ❗ 2 ta kanal majburiy
-required_channels = ["@shokh_movie", "@shokhmusic_hd"]
+required_channel = ("@shokh_movie", "@ShokhMusic_HD")
 
-# 🎬 Kino bazasi
 films = {
     "1": "https://t.me/shokh_movie/21",
     "2": "https://t.me/shokh_movie/22",
@@ -21,43 +19,41 @@ films = {
     "8": "https://t.me/shokh_movie/31",
     "9": "https://t.me/shokh_movie/32",
     "10": "https://t.me/shokh_movie/33",
+    
 }
 
-# ✅ Kanalga a'zo bo‘lishini tekshirish
 def check_subscription(user_id):
-    for channel in required_channels:
-        chat_member = bot.get_chat_member(channel, user_id)
-        if chat_member.status not in ["member", "administrator", "creator"]:
-            return False  # agar bittasiga ham kirmagan bo‘lsa
-    return True
+    try:
+        member = bot.get_chat_member(required_channel, user_id)
+        return member.status in ["member", "administrator", "creator"]
+    except Exception:
+        return False
 
-# 🚀 /start komandasi
 @bot.message_handler(commands=['start'])
 def start(message):
     if not check_subscription(message.from_user.id):
         markup = types.InlineKeyboardMarkup()
-        for channel in required_channels:
-            markup.add(types.InlineKeyboardButton(f"📢 Kanalga qo‘shilish: {channel}", url=f"https://t.me/{channel[1:]}"))
-        markup.add(types.InlineKeyboardButton("✅ Tekshirish", callback_data="check_sub"))
+        kanal_btn = types.InlineKeyboardButton("📢 Shokh_movie", url="https://t.me/shokh_movie")
+        check_btn = types.InlineKeyboardButton("✅ Tekshirish", callback_data="check_sub")
+        markup.add(kanal_btn)
+        markup.add(check_btn)
 
         bot.send_message(
             message.chat.id,
-            "❗ Botdan foydalanish uchun avval IKKALA kanalimizga a’zo bo‘ling!",
+            "❗ Botdan foydalanish uchun avval kanalimizga a’zo bo‘ling!",
             reply_markup=markup
         )
     else:
         send_welcome(message)
 
-# 🔁 Tekshirish tugmasi
 @bot.callback_query_handler(func=lambda call: call.data == "check_sub")
 def check_sub(call):
     if check_subscription(call.from_user.id):
         bot.answer_callback_query(call.id, "✅ Obuna tasdiqlandi!")
         send_welcome(call.message)
     else:
-        bot.answer_callback_query(call.id, "❗ Hali ham ikkala kanalga a’zo bo‘lmadingiz!")
+        bot.answer_callback_query(call.id, "❗ Hali kanalga a’zo bo‘lmadingiz!")
 
-# 👋 Xush kelibsiz qismi
 def send_welcome(message):
     markup = types.InlineKeyboardMarkup()
     kanal_btn = types.InlineKeyboardButton("📢 Telegram Kanal", url="https://t.me/shokh_movie")
@@ -73,7 +69,6 @@ def send_welcome(message):
 
     bot.send_message(message.chat.id, text, reply_markup=markup)
 
-# 🔎 Kino qidirish
 @bot.message_handler(func=lambda message: True)
 def search(message):
     if not check_subscription(message.from_user.id):
@@ -102,4 +97,4 @@ def webhook():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    server.run(host="0.0.0.0", port=port
+    server.run(host="0.0.0.0", port=port)
