@@ -19,7 +19,7 @@ films = {
     "8": "https://t.me/shokh_movie/31",
     "9": "https://t.me/shokh_movie/32",
     "10": "https://t.me/shokh_movie/33",
-    
+    "11": "https://t.me/shokh_movie/34",
 }
 
 def check_subscription(user_id):
