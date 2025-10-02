@@ -20,6 +20,12 @@ films = {
     "9": "https://t.me/shokh_movie/32",
     "10": "https://t.me/shokh_movie/33",
     "11": "https://t.me/shokh_movie/34",
+    "12": "https://t.me/shokh_movie/37",
+    "12": "https://t.me/shokh_movie/38",
+    "12": "https://t.me/shokh_movie/39",
+    "12": "https://t.me/shokh_movie/40",
+    "12": "https://t.me/shokh_movie/41",
+    "12": "https://t.me/shokh_movie/42",
 }
 
 def check_subscription(user_id):
