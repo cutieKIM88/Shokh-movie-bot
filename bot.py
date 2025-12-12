@@ -6,7 +6,7 @@ import os
 bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")  
 server = Flask(__name__)
 
-required_channel = ("@shokh_movie", "@World_Movie_Uz")
+required_channel = ("@shokh_movie", "@World_Movie_Uzb")
 
 films = {
     "1": "https://t.me/shokh_movie/21",
@@ -52,7 +52,7 @@ def start(message):
     if not check_subscription(message.from_user.id):
         markup = types.InlineKeyboardMarkup()
         kanal1 = types.InlineKeyboardButton("📢 Shokh_movie", url="https://t.me/shokh_movie")
-        kanal2 = types.InlineKeyboardButton("🎬 World_Movie_Uz", url="https://t.me/World_Movie_Uz")
+        kanal2 = types.InlineKeyboardButton("🎬 World_Movie_Uz", url="https://t.me/World_Movie_Uzb")
         check_btn = types.InlineKeyboardButton("✅ Tekshirish", callback_data="check_sub")
         
         markup.add(kanal1)
