@@ -6,7 +6,7 @@ import os
 bot = TeleBot("7959291954:AAFrKLqU3J9FmVo1sTHuz_9hl58XqGqCGWI")  
 server = Flask(__name__)
 
-required_channel = ("@shokh_movie", "@World_Movie_Uzb")
+required_channel = ("@shokh_movie", "@world_movie_uzb")
 
 films = {
     "1": "https://t.me/shokh_movie/21",
