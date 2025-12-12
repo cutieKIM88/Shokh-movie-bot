@@ -39,8 +39,11 @@ films = {
 
 def check_subscription(user_id):
     try:
-        member = bot.get_chat_member(required_channel, user_id)
-        return member.status in ["member", "administrator", "creator"]
+        for channel in required_channel:
+            member = bot.get_chat_member(channel, user_id)
+            if member.status not in ["member", "administrator", "creator"]:
+                return False
+        return True
     except Exception:
         return False
 
