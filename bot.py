@@ -9,7 +9,7 @@ server = Flask(__name__)
 required_channel = ("@shokh_movie", "@SHOKH_MUSIC_HD")
 
 films = {
-    "1": "https://t.me/shokh_movie/21",
+    "1": "https://t.me/shokh_movie/398",
     "2": "https://t.me/shokh_movie/22",
     "3": "https://t.me/shokh_movie/23",
     "4": "https://t.me/shokh_movie/26",
