@@ -10,7 +10,7 @@ required_channel = ("@shokh_movie", "@SHOKH_MUSIC_HD")
 
 films = {
     "1": "https://t.me/shokh_movie/398",
-    "2": "https://t.me/shokh_movie/22",
+    "2": "https://t.me/shokh_movie/400",
     "3": "https://t.me/shokh_movie/23",
     "4": "https://t.me/shokh_movie/26",
     "5": "https://t.me/shokh_movie/28",
